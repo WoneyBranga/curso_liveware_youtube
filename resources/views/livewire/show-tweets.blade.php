@@ -22,6 +22,10 @@
                 @forelse ($tweets as $tweet)
                     <li class="flex">
                         <div class="text-gray-500">
+                            @if ($tweet->user->photo)
+                                <img src="{{ Storage::url("{$tweet->user->photo}") }}" width='50px' heigh='50px'
+                                    alt="aaa">
+                            @endif
                             {{ $tweet->user->name }} - {{ $tweet->content }}
                         </div>
                         @if ($tweet->likes->count())
