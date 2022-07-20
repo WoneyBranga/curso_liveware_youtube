@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tweet extends Model
+class Like extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'content',
-        'user_id'
+        'user_id',
+        'tweet_id'
     ];
 
     public function user()
@@ -19,12 +19,8 @@ class Tweet extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function likes()
+    public function tweet()
     {
-        return $this->hasMany(Like::class)->where(function ($query) {
-            if (auth()->check()) {
-                $query->where('user_id', auth()->user()->id);
-            }
-        });
+        return $this->belongsTo(Tweet::class);
     }
 }
