@@ -1,9 +1,14 @@
 <div>
     Show Tweets
 
-    <p>{{ $message }}</p>
-
-    <input type="text" name="message" id="message" wire:model="message" />
+    <p>{{ $content }}</p>
+    <form method="post" wire:submit.prevent="create">
+        <input type="text" name="content" id="content" wire:model="content" />
+        <button type="submit"> criar tweet</button>
+    </form>
+    @error('content')
+        {{ $message }}
+    @enderror
 
     <br>
 
@@ -14,5 +19,11 @@
     @empty
         <p>sem tweets</p>
     @endforelse
+
+
+    <hr>
+    <div>
+        {{ $tweets->links() }}
+    </div>
 
 </div>
